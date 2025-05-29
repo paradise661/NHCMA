@@ -1,0 +1,113 @@
+.media-wrapper {
+    overflow: hidden;
+    img {
+        width: 100%;
+        height: 100%;
+        object-position: cover;
+        object-position: center;
+    }
+}
+.img-landscape {
+    height: 0;
+    overflow: hidden;
+    padding-top: 56.25%;
+    background: white;
+    position: relative;
+}
+.img-landscape img,
+.img-landscape video,
+.img-landscape iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.img-wide {
+    height: 0;
+    overflow: hidden;
+    padding-top: 36.6666666667%;
+    background: white;
+    position: relative;
+}
+.img-wide img,
+.img-wide video,
+.img-wide iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+@media (max-width: 484.98px) {
+    .img-wide {
+        height: 0;
+        overflow: hidden;
+        padding-top: 56.25%;
+        background: white;
+        position: relative;
+    }
+    .img-wide img,
+    .img-wide video,
+    .img-wide iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+}
+.img-portrait {
+    height: 0;
+    overflow: hidden;
+    padding-top: 100%;
+    background: white;
+    position: relative;
+}
+.img-portrait img,
+.img-portrait video,
+.img-portrait iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.img-portrait-02 {
+    height: 0;
+    overflow: hidden;
+    padding-top: 150%;
+    background: white;
+    position: relative;
+}
+.img-portrait-02 img,
+.img-portrait-02 video,
+.img-portrait-02 iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.img-portrait-03 {
+    height: 0;
+    overflow: hidden;
+    padding-top: 62.5%;
+    background: white;
+    position: relative;
+}
+.img-portrait-03 img,
+.img-portrait-03 video,
+.img-portrait-03 iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}

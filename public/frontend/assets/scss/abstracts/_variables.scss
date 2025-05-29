@@ -1,0 +1,83 @@
+//*colors
+
+//primary color
+$primary: #2f499d;
+$primary-100: #2f499d99;
+$primary-200: #7dd2e7;
+$primary-300: #01acd8;
+$primary-400: rgba(47, 73, 157, 0.6);
+
+//base color
+$black-600: #121212;
+$black-500: #242424;
+$grey-400: #e2e6e8;
+$grey-300: #414141;
+$grey-200: #dddddd;
+$grey-100: #939393;
+
+//default
+$black: #000000;
+$white: #ffffff;
+
+//secondary
+$secondary: #ff6161;
+$secondary-100: #feedeb;
+$secondary-200: #fdd9d7;
+$secondary-300: #fdd7d8;
+$secondary-400: #ffb1b4;
+$secondary-500: #ee8185;
+$dark: #292929;
+
+//theme colors
+
+.gradient {
+    background: linear-gradient(
+        105.23deg,
+        #05d579 0%,
+        #003380 93.58%
+    ) !important;
+    backdrop-filter: blur(30px) !important;
+}
+
+$theme-colors: (
+    "white": $white,
+    "black": $black,
+    "primary": $primary,
+    "primary-300": $primary-300,
+    "primary-200": $primary-200,
+    "primary-100": $primary-100,
+    "primary-400": $primary-400,
+    "black-600": $black-600,
+    "black-500": $black-500,
+    "grey-400": $grey-400,
+    "grey-300": $grey-300,
+    "grey-200": $grey-200,
+    "grey-100": $grey-100,
+    "secondary-100": $secondary-100,
+    "secondary-200": $secondary-200,
+    "secondary-300": $secondary-300,
+    "secondary-400": $secondary-400,
+    "secondary-500": $secondary-500,
+    "secondary": $secondary,
+    "dark": $dark,
+);
+
+//*grid
+$grid-breakpoints: (
+    xxs: 0,
+    xs: 375px,
+    sm: 576px,
+    md: 768px,
+    lg: 992px,
+    xl: 1200px,
+    xxl: 1400px,
+);
+$container-max-widths: (
+    sm: 540px,
+    md: 720px,
+    lg: 960px,
+    xl: 1128px,
+    xxl: 1272px,
+);
+
+$navbar-light-toggler-icon-bg: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'><path stroke='#{$white}' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/></svg>");

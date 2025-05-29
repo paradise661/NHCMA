@@ -1,0 +1,20 @@
+
+$sizes: (
+ "br-0" :  0px,
+ "br-4" : 4px,
+ "br-8" :  8px, 
+ "br-12": 12px,
+);
+
+@each $key, $value in $sizes {
+  .#{$key} {
+    border-radius: $value;
+  }
+}
+
+//shadow
+
+
+
+
+

@@ -1,0 +1,139 @@
+@import "./framework/font";
+@import "../scss/abstracts/base";
+@import "./abstracts/variables";
+@import "./abstracts/mixins";
+@import "./framework/bootstrap";
+@import "./components/card";
+@import "./components/image";
+@import "./components/section";
+// @import "../icons/style.css";
+@import "../scss/abstracts/base";
+@import "./abstracts/utilities";
+@import "./abstracts/typography";
+@import "./layout/section";
+@import "./layout/header";
+
+swiper-container {
+    .swiper-button-next,
+    .swiper-button-prev {
+        color: #fff !important;
+        display: none !important;
+    }
+    .swiper-pagination-bullet {
+        background: #ffffff !important;
+    }
+}
+.clamp-1 {
+    display: -webkit-box !important;
+    -webkit-line-clamp: 1 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+}
+.clamp-2 {
+    display: -webkit-box !important;
+    -webkit-line-clamp: 2 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+}
+.clamp-3 {
+    display: -webkit-box !important;
+    -webkit-line-clamp: 3 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+}
+.clamp-4 {
+    display: -webkit-box !important;
+    -webkit-line-clamp: 4 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+}
+.clamp-5 {
+    display: -webkit-box !important;
+    -webkit-line-clamp: 5 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+}
+.clamp-6 {
+    display: -webkit-box !important;
+    -webkit-line-clamp: 6 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+}
+.clamp-7 {
+    display: -webkit-box !important;
+    -webkit-line-clamp: 7 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+}
+.clamp-8 {
+    display: -webkit-box !important;
+    -webkit-line-clamp: 8 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+}
+.clamp-9 {
+    display: -webkit-box !important;
+    -webkit-line-clamp: 9 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+}
+.clamp-10 {
+    display: -webkit-box !important;
+    -webkit-line-clamp: 10 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+}
+.clamp-11 {
+    display: -webkit-box !important;
+    -webkit-line-clamp: 11 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+}
+.clamp-12 {
+    display: -webkit-box !important;
+    -webkit-line-clamp: 12 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+}
+.clamp-13 {
+    display: -webkit-box !important;
+    -webkit-line-clamp: 13 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+}
+.clamp-14 {
+    display: -webkit-box !important;
+    -webkit-line-clamp: 14 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+}
+
+.text-justify {
+    text-align: justify;
+}
+
+.paragraph {
+    font-size: 1.1rem !important;
+    color: $grey-300 !important;
+    line-height: 180% !important;
+}
+
+.navbar {
+    .nav-item {
+        .menu-active {
+            color: $secondary;
+        }
+    }
+}
+
+.breadcrumb {
+    .breadcrumb-item a {
+        color: $white;
+    }
+    .breadcrumb-item {
+        color: $white;
+        &::before {
+            color: $white;
+        }
+    }
+}

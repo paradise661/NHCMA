@@ -1,0 +1,40 @@
+$custom-fontweight: (
+    "bold": 700,
+    "semi-bold": 600,
+    "medium": 500,
+    "regular": 400,
+);
+
+@each $name, $value in $custom-fontweight {
+    .#{$name} {
+        font-weight: $value !important;
+    }
+}
+.heading-1 {
+    @include typography(900, 1rem, 150%);
+}
+.paragraph {
+    @include typography(400, 1rem, 180%);
+    font-size: 20px;
+}
+.heading-2 {
+    @include typography(800, 2rem, 150%);
+}
+
+.heading-3 {
+    @include typography(400 !important, 1.5rem !important, 150%);
+    font-size: 1.5rem !important;
+}
+.headings-3 {
+    @include typography(500 !important, 1.75rem !important, 150%);
+}
+
+.heading-4 {
+    @include typography(600, 1rem, 150%);
+    font-size: 24px;
+}
+
+heading-5 {
+    @include typography(500, 1rem, 150%);
+    font-size: 16px;
+}
