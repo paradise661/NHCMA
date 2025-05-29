@@ -15,6 +15,7 @@ use App\Models\MemberInfo;
 use App\Models\Municipality;
 use App\Models\OurTeam;
 use App\Models\Slider;
+use App\Models\PopUp;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -27,7 +28,8 @@ class HomeController extends Controller
         $blogs = Blog::latest()->take(3)->get();
         $memberinfos = MemberInfo::oldest('order')->get();
         $executive_member = MemberInfo::where('type', 'executive')->first();
-        return view('frontend.home', compact('sliders', 'upcoming_events', 'media_coverages', 'blogs', 'memberinfos', 'executive_member'));
+        $popups = PopUp::all();
+        return view('frontend.home', compact('sliders', 'upcoming_events', 'media_coverages', 'blogs', 'memberinfos', 'executive_member','popups'));
     }
 
     public function contact()

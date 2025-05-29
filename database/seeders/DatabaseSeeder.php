@@ -71,11 +71,11 @@ class DatabaseSeeder extends Seeder
             }
         }
 
-        User::create([
-            'name' => 'Super Admin',
-            'email' => 'admin@admin.com',
-            'password' => Hash::make('password'),
-        ]);
+        // User::create([
+        //     'name' => 'Super Admin',
+        //     'email' => 'admin@admin.com',
+        //     'password' => Hash::make('password'),
+        // ]);
 
         Configure::create([
             'email' => 'healthcare@gmail.com',

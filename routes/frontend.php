@@ -1,14 +1,16 @@
 <?php
-
+use App\Http\Controllers\Frontend\RegisterController;
 use App\Http\Controllers\Frontend\ActivityController;
 use App\Http\Controllers\Frontend\ArticleController;
 use App\Http\Controllers\Frontend\BlogsController;
 use App\Http\Controllers\Frontend\EventController;
+use App\Http\Controllers\Frontend\EventRegisterController;
 use App\Http\Controllers\Frontend\MemberController;
 use App\Http\Controllers\Frontend\MemberRegistrationController;
 use App\Http\Controllers\Frontend\NewsController;
 use App\Http\Controllers\Frontend\PageController;
 use App\Http\Controllers\Frontend\ResourceController;
+use App\Http\Controllers\Frontend\PopupController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -33,6 +35,7 @@ Route::get('/', [App\Http\Controllers\Frontend\HomeController::class, 'index'])-
 Route::get('/news', [NewsController::class, 'index'])->name('news');
 Route::get('/news/{slug}', [NewsController::class, 'show'])->name('news.show');
 
+
 Route::get('/activities', [ActivityController::class, 'index'])->name('activities');
 Route::get('/activities/{slug}', [ActivityController::class, 'show'])->name('activity.show');
 
@@ -46,6 +49,9 @@ Route::get('/contact', [App\Http\Controllers\Frontend\HomeController::class, 'co
 
 Route::get('/events', [EventController::class, 'index'])->name('events');
 Route::get('/events/{slug}', [EventController::class, 'show'])->name('events.show');
+
+Route::get('/eventsregister', [EventRegisterController::class, 'index'])->name('eventsregister');
+Route::get('/eventsregister/{slug}', [EventRegisterController::class, 'show'])->name('eventsregister.show');
 
 Route::get('/page/{slug}', [PageController::class, 'show'])->name('page.show');
 
@@ -72,3 +78,7 @@ Route::post('fetch-municipality', [App\Http\Controllers\Frontend\HomeController:
 //resources
 Route::get('/links', [ResourceController::class, 'usefulLinks'])->name('usefullinks');
 Route::get('/documents', [ResourceController::class, 'usefulDocuments'])->name('usefuldocuments');
+
+
+Route::get('/register', [RegisterController::class, 'register'])->name('register');
+Route::post('/register', [RegisterController::class, 'registerStore'])->name('frontend.register.store');

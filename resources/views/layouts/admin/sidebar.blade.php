@@ -21,6 +21,13 @@
                 <div data-i18n="Analytics">Dashboard</div>
             </a>
         </li>
+        <li class="menu-item {{ Request::segment(1) == 'register' ? 'active' : '' }}">
+            <a class="menu-link text-decoration-none{{ Request::segment(2) == 'agency' ? 'active' : '' }}"
+                href="{{ route('admin.register.index') }}">
+                <i class="menu-icon tf-icons bx bxs-contact"></i>
+                <div data-i18n="Accordion">Register</div>
+            </a>
+        </li>
 
         <!-- CMS -->
         <li class="menu-header small text-uppercase"><span class="menu-header-text">CMS</span></li>
@@ -73,6 +80,13 @@
             <a class="menu-link" href="{{ route('admin.blogs.index') }}">
                 <i class="menu-icon tf-icons bx bx-cube-alt"></i>
                 <div data-i18n="Basic">Blogs</div>
+            </a>
+        </li>
+
+        <li class="menu-item {{ Request::segment(2) == 'eventsregister' ? 'active' : '' }}">
+            <a class="menu-link" href="{{ route('admin.eventsregister.index') }}">
+                <i class="menu-icon tf-icons bx bx-calendar-check"></i>
+                <div data-i18n="Basic">Event Registration</div>
             </a>
         </li>
 
@@ -143,6 +157,12 @@
             <a class="menu-link" href="{{ route('admin.inquirypersons.index') }}">
                 <i class="menu-icon tf-icons bx bx-user-voice"></i>
                 <div data-i18n="Basic">Inquiry Persons</div>
+            </a>
+        </li>
+        <li class="menu-item {{ Request::segment(2) == 'popup' ? 'active open' : '' }}">
+            <a class="menu-link" id="popup-link" href="{{ route('admin.popup.index') }}">
+                <i class="menu-icon tf-icons bx bx-news"></i>
+                <div data-i18n="General Setting">PopUp</div>
             </a>
         </li>
 

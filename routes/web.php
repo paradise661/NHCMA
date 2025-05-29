@@ -7,6 +7,8 @@ use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\ConfigureController;
 use App\Http\Controllers\Admin\DocumentsController;
 use App\Http\Controllers\Admin\EventController;
+use App\Http\Controllers\Admin\EventRegisterController;
+use App\Http\Controllers\admin\RegisterController;
 use App\Http\Controllers\Admin\FaqController;
 use App\Http\Controllers\Admin\GalleryController;
 use App\Http\Controllers\Admin\ImageConfigureController;
@@ -22,6 +24,7 @@ use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\SocialmediaController;
+use App\Http\Controllers\Admin\PopUpController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -48,6 +51,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'auth'], fu
     Route::resource('articles', ArticleController::class);
     Route::resource('news', NewsController::class);
     Route::resource('events', EventController::class);
+    Route::resource('eventsregister', EventRegisterController::class);
     Route::resource('ourteams', OurTeamController::class);
     Route::resource('members', MemberController::class);
     Route::resource('mediacoverages', MediaCoverageController::class);
@@ -76,4 +80,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'auth'], fu
 
     Route::resource('links', LinksController::class);
     Route::resource('documents', DocumentsController::class);
+
+    
+    Route::resource('popup', PopUpController::class);
+    Route::resource('register', RegisterController::class);
 });
