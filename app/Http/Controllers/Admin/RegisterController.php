@@ -3,6 +3,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Register;
 use App\Http\Requests\StoreRegisterRequest;
+use App\Exports\RegisterExport;
+use Maatwebsite\Excel\Facades\Excel;
 use Session;
 use Illuminate\Http\Request;
 use File;
@@ -27,7 +29,7 @@ class RegisterController extends Controller
     public function destroy(Register $register)
     {
         $register->delete();
-        return redirect()->route('register.index')->with('message', 'Delete Successfully');
+        return redirect()->route('admin.register.index')->with('message', 'Delete Successfully');
     }
 
     // Store a new registration
@@ -39,4 +41,8 @@ class RegisterController extends Controller
         session()->flash('success', 'Your registration was successful!');
         return redirect()->back();
     }
+    public function export()
+{
+    return Excel::download(new \App\Exports\RegisterExport, 'test.xlsx');
+}
 }
