@@ -5,15 +5,15 @@
             <div class="row">
                 <div class="col-sm-12 col-md-6 mb-4">
                     <h2 class="text-primary">Registration</h2>
-                    <div class="text-grey-300 my-3 align-items-center paragraph">
+                    <div class="text-grey-300 paragraph mb-0">
                         {!! strlen($eventregister->description) > 2000
                             ? substr($eventregister->description, 0, 2000) . '...'
                             : $eventregister->description !!}
                     </div>
 
                     <!-- Responsive and styled image -->
-                    <div class="my-4 image-container text-center">
-                        <img class="img-fluid rounded shadow-sm equal-image"
+                    <div class="image-container-small text-center mt-0">
+                        <img class="img-fluid rounded shadow-sm"
                             src="{{ asset('admin/images/setting/' . $settings['faq_image']) }}" alt="QR"
                             style="object-fit: cover;">
                     </div>
@@ -25,16 +25,25 @@
                     </div>
 
                 </div>
-                <div class="col-sm-12 col-md-6 mb-4 media-wrapper">
-                    <img src="{{ asset('admin/images/' . $eventregister->image) }}" alt="{{ $eventregister->title ?? '' }}">
-
+                <div class="col-sm-12 col-md-6 mb-4 media-wrapper text-center">
+                    <img class="img-fluid rounded shadow-sm" src="{{ asset('admin/images/' . $eventregister->image) }}"
+                        alt="{{ $eventregister->title ?? '' }}"
+                        style="object-fit: contain; max-height: 400px; width: 100%;">
                 </div>
+
             </div>
             <div class="row">
             </div>
         </div>
     </section>
     <style>
+        .image-container-small {
+            width: 80%;
+            max-width: 400px;
+            height: auto;
+            margin: 0 auto;
+        }
+
         body {
             background-color: #f7f9fc;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
