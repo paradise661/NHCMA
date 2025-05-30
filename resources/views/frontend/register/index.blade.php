@@ -37,6 +37,13 @@
         </div>
     </section>
     <style>
+        .image-container-small {
+            width: 80%;
+            max-width: 400px;
+            height: auto;
+            margin: 0 auto;
+        }
+
         body {
             background-color: #f7f9fc;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
