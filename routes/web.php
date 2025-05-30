@@ -8,7 +8,7 @@ use App\Http\Controllers\Admin\ConfigureController;
 use App\Http\Controllers\Admin\DocumentsController;
 use App\Http\Controllers\Admin\EventController;
 use App\Http\Controllers\Admin\EventRegisterController;
-use App\Http\Controllers\admin\RegisterController;
+use App\Http\Controllers\Admin\RegisterController;
 use App\Http\Controllers\Admin\FaqController;
 use App\Http\Controllers\Admin\GalleryController;
 use App\Http\Controllers\Admin\ImageConfigureController;
