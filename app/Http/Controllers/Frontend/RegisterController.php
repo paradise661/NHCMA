@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Register;
+use App\Models\EventRegister;
 use App\Http\Requests\StoreRegisterRequest;
 use Illuminate\Http\Request;
 
@@ -12,7 +13,8 @@ class RegisterController extends Controller
     // Show the registration form
     public function register()
     {
-        return view("frontend.register.index");
+        $eventregister = EventRegister::orderBy('date', 'asc')->first();
+        return view("frontend.register.index", compact('eventregister'));
     }
 
     // Store the registration form submission

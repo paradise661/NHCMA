@@ -1,5 +1,26 @@
 @extends('layouts.frontend.master')
 @section('content')
+    <section class="mt-5 about-missions">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 col-md-6 mb-4">
+                    <h2 class="text-primary">Registration</h2>
+                    <div class="text-grey-300 my-3 align-items-center paragraph">
+                        {!! strlen($eventregister->description) > 2000
+                            ? substr($eventregister->description, 0, 2000) . '...'
+                            : $eventregister->description !!}
+                    </div>
+                    </p>
+                </div>
+                <div class="col-sm-12 col-md-6 mb-4 media-wrapper">
+                    <img src="{{ asset('admin/images/' . $eventregister->image) }}" alt="{{ $eventregister->title ?? '' }}">
+
+                </div>
+            </div>
+            <div class="row">
+            </div>
+        </div>
+    </section>
     <style>
         body {
             background-color: #f7f9fc;
@@ -95,10 +116,10 @@
 
     <div class="page-wrapper">
         <!-- Left Sticky Panel -->
-        <div class="side-panel">
-            <img class="logo" src="{{ asset('frontend/assets/images/loogo.jpg') }}" alt="Logo" />
+        {{-- <div class="side-panel">
+            <img class="logo" src="{{ asset('frontend/assets/images/loogo.jpeg') }}" alt="Logo" />
             <img class="qr-code" src="{{ asset('frontend/assets/images/QR1.png') }}" alt="QR Code" />
-        </div>
+        </div> --}}
 
         <!-- Main Form -->
         <div class="form-wrapper">
@@ -273,10 +294,10 @@
         </div>
 
         <!-- Right Sticky Panel -->
-        <div class="side-panel">
-            <img class="logo" src="{{ asset('frontend/assets/images/logo1.png') }}" alt="Logo" />
+        {{-- <div class="side-panel">
+            <img class="logo" src="{{ asset('frontend/assets/images/logo1.jpeg') }}" alt="Logo" />
             <img class="qr-code" src="{{ asset('frontend/assets/images/QR.png') }}" alt="QR Code" />
-        </div>
+        </div> --}}
     </div>
 
     {{-- Scripts --}}

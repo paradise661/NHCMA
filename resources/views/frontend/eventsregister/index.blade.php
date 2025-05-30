@@ -13,7 +13,8 @@
                     </p>
                 </div>
                 <div class="col-sm-12 col-md-6 mb-4 media-wrapper">
-                    <img src="{{ asset('admin/images/' . $eventregister->image) }}" alt="{{ $eventregister->title ?? '' }}">
+                    <img class="img-fluid" src="{{ asset('admin/images/' . $eventregister->image) }}"
+                        alt="{{ $eventregister->title ?? '' }}">
 
                 </div>
             </div>
