@@ -10,11 +10,23 @@
                             ? substr($eventregister->description, 0, 2000) . '...'
                             : $eventregister->description !!}
                     </div>
-                    </p>
+
+                    <!-- Responsive and styled image -->
+                    <div class="my-4 image-container text-center">
+                        <img class="img-fluid rounded shadow-sm equal-image"
+                            src="{{ asset('admin/images/setting/' . $settings['faq_image']) }}" alt="QR"
+                            style="object-fit: cover;">
+                    </div>
+
+                    <div class="text-grey-300 my-3 align-items-center paragraph">
+                        {!! strlen($eventregister->short_description) > 2000
+                            ? substr($eventregister->short_description, 0, 2000) . '...'
+                            : $eventregister->short_description !!}
+                    </div>
+
                 </div>
                 <div class="col-sm-12 col-md-6 mb-4 media-wrapper">
-                    <img class="img-fluid" src="{{ asset('admin/images/' . $eventregister->image) }}"
-                        alt="{{ $eventregister->title ?? '' }}">
+                    <img src="{{ asset('admin/images/' . $eventregister->image) }}" alt="{{ $eventregister->title ?? '' }}">
 
                 </div>
             </div>

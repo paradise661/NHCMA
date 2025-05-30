@@ -17,10 +17,5 @@ class EventRegisterController extends Controller
 }
 
 
-    // public function show($slug)
-    // {
-    //     $eventregisterdetails = EventRegister::where('slug', $slug)->first();
-    //     $moreeventsregister = EventRegister::where('slug', '!=', $slug)->get();
-    //     return view('frontend.eventsregister.show', compact('eventregisterdetails', 'moreeventsregister'));
-    // }
+    
 }

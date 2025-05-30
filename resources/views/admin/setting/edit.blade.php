@@ -257,7 +257,7 @@
 
                                                 <div class="col-md-6">
                                                     <div class="form-group mb-3">
-                                                        <label for="faq_image">FAQs Section Image</label>
+                                                        <label for="faq_image">QR Image</label>
                                                         <div class="custom-file">
                                                             <input class="faq_image" id="faq_image"
                                                                 data-default-file="{{ $settings['faq_image'] != null ? asset('admin/images/setting') . '/' . $settings['faq_image'] : null }}"
