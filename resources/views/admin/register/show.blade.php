@@ -105,10 +105,24 @@
                             <td>Payment Voucher</td>
                             <td>
                                 @if ($register->image)
-                                    <!-- Thumbnail -->
-                                    <img data-bs-toggle="modal" data-bs-target="#voucherModal"
-                                        src="{{ asset($register->image) }}" alt="Payment Voucher"
-                                        style="max-width: 150px; max-height: 150px; cursor: pointer;">
+                                    @php
+                                        $extension = pathinfo($register->image, PATHINFO_EXTENSION);
+                                    @endphp
+
+                                    @if (in_array(strtolower($extension), ['jpg', 'jpeg', 'png', 'gif', 'bmp', 'webp']))
+                                        <!-- Image Thumbnail -->
+                                        <img data-bs-toggle="modal" data-bs-target="#voucherModal"
+                                            src="{{ asset($register->image) }}" alt="Payment Voucher"
+                                            style="max-width: 150px; max-height: 150px; cursor: pointer;">
+                                    @elseif (strtolower($extension) === 'pdf')
+                                        <!-- PDF file: open in new tab -->
+                                        <a href="{{ asset($register->image) }}" target="_blank"
+                                            style="text-decoration:none; color:blue; cursor:pointer;">
+                                            View PDF
+                                        </a>
+                                    @else
+                                        Unknown file type.
+                                    @endif
                                 @else
                                     No image uploaded.
                                 @endif
