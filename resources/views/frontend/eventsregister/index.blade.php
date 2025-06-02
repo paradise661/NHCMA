@@ -262,11 +262,11 @@
                     </div>
 
                     <div class="d-none" id="membershipDetails">
-                        <div class="form-floating form-section">
+                        {{-- <div class="form-floating form-section">
                             <input class="form-control" id="membershipNumber" name="member_num" type="text"
                                 placeholder="Membership Number">
                             <label for="membershipNumber">Membership Number</label>
-                        </div>
+                        </div> --}}
                         <div class="form-floating form-section">
                             <input class="form-control" id="lifeMember" name="lifeMember_num" type="text"
                                 placeholder="Life Member Number">
