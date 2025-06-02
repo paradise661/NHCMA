@@ -81,11 +81,11 @@
                             <td>{{ $register->membership }}</td>
 
                         </tr>
-                        <tr>
+                        {{-- <tr>
                             <td>Membership Number</td>
                             <td>{{ $register->member_num }}</td>
 
-                        </tr>
+                        </tr> --}}
                         <tr>
                             <td>Life Member Number</td>
                             <td>{{ $register->lifeMember_num }}</td>
