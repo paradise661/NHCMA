@@ -94,6 +94,8 @@
 
     <div class="page-wrapper">
 
+        <!-- Your existing form HTML unchanged -->
+
         <div class="form-wrapper">
             <div class="form-container">
                 <h2 class="form-title text-center mb-4">Registration Form</h2>
@@ -136,16 +138,21 @@
                         <select class="form-select @error('org_type') is-invalid @enderror" id="orgType" name="org_type">
                             <option selected disabled>Select</option>
                             <option value="Private Hospital" {{ old('org_type') == 'Private Hospital' ? 'selected' : '' }}>
-                                Private Hospital</option>
+                                Private
+                                Hospital
+                            </option>
                             <option value="Public Hospital" {{ old('org_type') == 'Public Hospital' ? 'selected' : '' }}>
-                                Public Hospital</option>
+                                Public Hospital
+                            </option>
                             <option value="NGO/INGO" {{ old('org_type') == 'NGO/INGO' ? 'selected' : '' }}>NGO/INGO
                             </option>
                             <option value="Academic Institution"
-                                {{ old('org_type') == 'Academic Institution' ? 'selected' : '' }}>Academic Institution
+                                {{ old('org_type') == 'Academic Institution' ? 'selected' : '' }}>Academic
+                                Institution
                             </option>
                             <option value="Government Body" {{ old('org_type') == 'Government Body' ? 'selected' : '' }}>
-                                Government Body</option>
+                                Government Body
+                            </option>
                             <option value="Other" {{ old('org_type') == 'Other' ? 'selected' : '' }}>Other</option>
                         </select>
                         <label for="orgType">Type of Organization</label>
@@ -345,11 +352,40 @@
                 </form>
             </div>
         </div>
+
+        <!-- Confirmation Modal -->
+        <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-scrollable">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="confirmModalLabel">Please Confirm Your Details</h5>
+                        <button class="btn-close" data-bs-dismiss="modal" type="button" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body" id="confirmModalBody" style="max-height: 60vh; overflow-y:auto;">
+                        <!-- Filled dynamically -->
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" id="editBtn" data-bs-dismiss="modal"
+                            type="button">Edit</button>
+                        <button class="btn btn-primary" id="confirmBtn" type="button">Confirm & Submit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
+    <!-- Bootstrap CSS and JS (if not already included) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Axios & Toastr (if not already included) -->
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
     <script>
-        // Show/hide "Other" input fields based on select choices
+        // Show/hide "Other" fields on select change
         document.getElementById('orgType').addEventListener('change', function() {
             document.getElementById('orgTypeOtherWrapper').classList.toggle('d-none', this.value !== 'Other');
         });
@@ -359,106 +395,129 @@
         document.getElementById('heardFrom').addEventListener('change', function() {
             document.getElementById('heardFromOtherWrapper').classList.toggle('d-none', this.value !== 'Other');
         });
-
-        // Show/hide membership details
-        document.getElementById('memYes').addEventListener('change', function() {
-            document.getElementById('membershipDetails').classList.toggle('d-none', !this.checked);
+        // Membership radio buttons to show/hide details
+        document.querySelectorAll('input[name="membership"]').forEach(radio => {
+            radio.addEventListener('change', function() {
+                document.getElementById('membershipDetails').classList.toggle('d-none', this.value !==
+                    'Yes');
+            });
         });
-        document.getElementById('memNo').addEventListener('change', function() {
-            document.getElementById('membershipDetails').classList.toggle('d-none', this.checked);
-        });
 
-        // Form submission validation & AJAX post
+        let formDataGlobal = null;
+        let confirmModal = new bootstrap.Modal(document.getElementById('confirmModal'));
+
+        function createRow(label, value) {
+            return `
+    <tr>
+      <th style="width: 35%; padding: 8px; vertical-align: top; text-align: left; font-weight: 600; color:#333;">${label}</th>
+      <td style="padding: 8px; vertical-align: top; text-align: left; color:#555;">${value}</td>
+    </tr>
+  `;
+        }
+
         document.getElementById('registrationForm').addEventListener('submit', function(e) {
             e.preventDefault();
 
             let form = e.target;
-            let formData = new FormData(form);
+            formDataGlobal = new FormData(form);
 
-            const requiredFields = [{
-                    id: 'fullName',
-                    name: 'Full Name'
-                },
-                {
-                    id: 'mobile',
-                    name: 'Mobile Number'
-                },
-                {
-                    id: 'email',
-                    name: 'Email Address'
-                },
-                {
-                    id: 'voucher',
-                    name: 'Payment Voucher'
-                }
-            ];
-
-            let isValid = true;
-            let missingFields = [];
-
-            // Clear previous invalid classes
-            requiredFields.forEach(field => {
-                let el = document.getElementById(field.id);
-                el.classList.remove('is-invalid');
-            });
-
-            requiredFields.forEach(field => {
-                let el = document.getElementById(field.id);
-                if (!el.value || (el.type === 'file' && el.files.length === 0)) {
-                    isValid = false;
-                    missingFields.push(field.name);
-                    el.classList.add('is-invalid');
+            let requiredIds = ['fullName', 'mobile', 'email', 'voucher'];
+            let missing = [];
+            requiredIds.forEach(id => {
+                let el = document.getElementById(id);
+                if (el.type === 'file') {
+                    if (el.files.length === 0) missing.push(el.previousElementSibling?.innerText ||
+                        'File input');
+                } else if (!el.value.trim()) {
+                    missing.push(el.previousElementSibling?.innerText || 'Input');
                 }
             });
 
             let alertBox = document.getElementById('formAlert');
-
-            if (!isValid) {
+            if (missing.length) {
                 alertBox.classList.remove('d-none', 'alert-success');
                 alertBox.classList.add('alert-danger');
-                alertBox.innerText = `Please fill out the required fields *: ${missingFields.join(', ')}`;
+                alertBox.innerText = 'Please fill out the required fields *: ' + missing.join(', ');
                 return;
+            }
+            alertBox.classList.add('d-none');
+
+            const getVal = key => formDataGlobal.get(key) || '';
+            let membership = getVal('membership');
+            let voucherFile = formDataGlobal.get('image');
+            let voucherPreview = '';
+
+            if (voucherFile && voucherFile.name) {
+                let fileName = voucherFile.name.toLowerCase();
+                if (/\.(jpg|jpeg|png|gif)$/i.test(fileName)) {
+                    // Create image preview
+                    let url = URL.createObjectURL(voucherFile);
+                    voucherPreview =
+                        `<img src="${url}" alt="Voucher Image" style="max-width: 100%; max-height: 150px; border: 1px solid #ddd; border-radius: 4px;">`;
+                } else if (/\.pdf$/i.test(fileName)) {
+                    voucherPreview =
+                        `<a href="${URL.createObjectURL(voucherFile)}" target="_blank" rel="noopener noreferrer">View PDF Voucher</a>`;
+                } else {
+                    voucherPreview = `<span>${voucherFile.name}</span>`;
+                }
             } else {
-                alertBox.classList.add('d-none');
-                alertBox.classList.remove('alert-danger');
+                voucherPreview = 'No file selected';
             }
 
-            axios.post(form.action, formData)
+            // Build table rows
+            let rows = `
+    ${createRow('Full Name', getVal('name'))}
+    ${createRow('Designation', getVal('desigination'))}
+    ${createRow('Organization', getVal('organization'))}
+    ${createRow('Organization Type', getVal('org_type') + (getVal('org_type') === 'Other' ? ` (${getVal('org_type_other')})` : ''))}
+    ${createRow('Mobile', getVal('number'))}
+    ${createRow('Email', getVal('email'))}
+    ${createRow('Province', getVal('province'))}
+    ${createRow('Participation Type', getVal('participation') + (getVal('participation') === 'Other' ? ` (${getVal('participation_other')})` : ''))}
+    ${createRow('Dietary Restrictions', getVal('dietary_restriction'))}
+    ${createRow('Accommodation Required', getVal('accommodation'))}
+    ${createRow('NHCMA Membership', membership)}
+    ${membership === 'Yes' ? createRow('Life Member Number', getVal('lifeMember_num')) : ''}
+    ${membership === 'Yes' ? createRow('General Member Number', getVal('generalMember_num')) : ''}
+    ${createRow('Heard From', getVal('hear') + (getVal('hear') === 'Other' ? ` (${getVal('hear_other')})` : ''))}
+    ${createRow('Remarks or Questions', getVal('remarks'))}
+    ${createRow('Payment Voucher', voucherPreview)}
+  `;
+
+            document.getElementById('confirmModalBody').innerHTML = `
+    <table style="width: 100%; border-collapse: collapse; font-family: Arial, sans-serif;">
+      <tbody>
+        ${rows}
+      </tbody>
+    </table>
+  `;
+
+            confirmModal.show();
+        });
+
+
+        document.getElementById('confirmBtn').addEventListener('click', function() {
+            let form = document.getElementById('registrationForm');
+            axios.post(form.action, formDataGlobal)
                 .then(response => {
                     toastr.success(response.data.message || 'Registration successful!');
                     form.reset();
-
-                    // Remove all validation classes after reset
-                    requiredFields.forEach(field => {
-                        let el = document.getElementById(field.id);
-                        el.classList.remove('is-invalid');
-                    });
-
-                    // Hide optional "Other" inputs and membership details after reset
-                    document.getElementById('orgTypeOtherWrapper').classList.add('d-none');
-                    document.getElementById('participationOtherWrapper').classList.add('d-none');
-                    document.getElementById('heardFromOtherWrapper').classList.add('d-none');
-                    document.getElementById('membershipDetails').classList.add('d-none');
+                    // Hide other/ membership sections after reset
+                    ['orgTypeOtherWrapper', 'participationOtherWrapper', 'heardFromOtherWrapper',
+                        'membershipDetails'
+                    ]
+                    .forEach(id => document.getElementById(id).classList.add('d-none'));
+                    confirmModal.hide();
                 })
                 .catch(error => {
                     if (error.response && error.response.data && error.response.data.errors) {
-                        const errors = error.response.data.errors;
-                        Object.values(errors).forEach(msgArray => {
-                            toastr.error(msgArray[0]);
+                        Object.values(error.response.data.errors).forEach(msgs => {
+                            toastr.error(msgs[0]);
                         });
                     } else {
-                        toastr.error('Something went wrong!');
+                        toastr.error('Something went wrong! Please try again.');
                     }
                 });
-        });
-
-        // Remove red border on input as user types or changes file
-        ['fullName', 'mobile', 'email', 'voucher'].forEach(id => {
-            const el = document.getElementById(id);
-            if (el) {
-                el.addEventListener('input', () => el.classList.remove('is-invalid'));
-                el.addEventListener('change', () => el.classList.remove('is-invalid'));
-            }
         });
     </script>
 @endsection
