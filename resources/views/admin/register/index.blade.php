@@ -7,7 +7,7 @@
         <div class="card-header d-flex justify-content-between align-items-center">
             <h5 class="mb-0">Registers ({{ $register->total() }})</h5>
             <small class="text-muted float-end">
-                <a class="btn btn-primary" href="{{ route('register.export') }}"><i class="fa-solid fa-download"></i>
+                <a class="btn btn-primary" href="{{ route('admin.register.export') }}"><i class="fa-solid fa-download"></i>
                     Download</a>
             </small>
         </div>
@@ -57,9 +57,9 @@
             @endif
         </div>
     </div>
-    <a class="btn btn-success btn-sm" href="{{ route('admin.register.export') }}">
+    {{-- <a class="btn btn-success btn-sm" href="{{ route('admin.register.export') }}">
         <i class="fa fa-download"></i> Export to Excel
-    </a>
+    </a> --}}
 @endsection
 
 @section('scripts')
