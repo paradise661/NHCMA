@@ -137,175 +137,250 @@
     </style>
 
     <div class="page-wrapper">
-        <!-- Left Sticky Panel -->
-        {{-- <div class="side-panel">
-            <img class="logo" src="{{ asset('frontend/assets/images/loogo.jpg') }}" alt="Logo" />
-            <img class="qr-code" src="{{ asset('frontend/assets/images/QR1.png') }}" alt="QR Code" />
-        </div> --}}
 
-        <!-- Main Form -->
         <div class="form-wrapper">
             <div class="form-container">
                 <h2 class="form-title text-center mb-4">Registration Form</h2>
-                <form id="registrationForm" enctype="multipart/form-data" method="post"
-                    action="{{ route('frontend.register.store') }}">
+                <form id="registrationForm" enctype="multipart/form-data" action="{{ route('frontend.register.store') }}"
+                    method="POST">
                     @csrf
 
+                    {{-- Full Name --}}
                     <div class="form-floating form-section">
-                        <input class="form-control" id="fullName" name="name" type="text" placeholder="Full Name"
-                            required>
-                        <label for="fullName">Full Name</label>
+                        <input class="form-control @error('name') is-invalid @enderror" id="fullName" name="name"
+                            type="text" placeholder="Full Name" value="{{ old('name') }}">
+                        <label for="fullName">Full Name <span class="text-danger">*</span></label>
+                        @error('name')
+                            <div class="text-danger mt-1 small">{{ $message }}</div>
+                        @enderror
                     </div>
 
+                    {{-- Designation --}}
                     <div class="form-floating form-section">
-                        <input class="form-control" id="designation" name="desigination" type="text"
-                            placeholder="Designation" required>
+                        <input class="form-control @error('desigination') is-invalid @enderror" id="designation"
+                            name="desigination" type="text" placeholder="Designation" value="{{ old('desigination') }}">
                         <label for="designation">Designation/Title</label>
+                        @error('desigination')
+                            <div class="text-danger mt-1 small">{{ $message }}</div>
+                        @enderror
                     </div>
 
+                    {{-- Organization --}}
                     <div class="form-floating form-section">
-                        <input class="form-control" id="organization" name="organization" type="text"
-                            placeholder="Organization" required>
+                        <input class="form-control @error('organization') is-invalid @enderror" id="organization"
+                            name="organization" type="text" placeholder="Organization" value="{{ old('organization') }}">
                         <label for="organization">Name of Hospital/Organization</label>
+                        @error('organization')
+                            <div class="text-danger mt-1 small">{{ $message }}</div>
+                        @enderror
                     </div>
 
+                    {{-- Org Type --}}
                     <div class="form-floating form-section">
-                        <select class="form-select" id="orgType" name="org_type">
+                        <select class="form-select @error('org_type') is-invalid @enderror" id="orgType" name="org_type">
                             <option selected disabled>Select</option>
-                            <option value="Private Hospital">Private Hospital</option>
-                            <option value="Public Hospital">Public Hospital</option>
-                            <option value="NGO/INGO">NGO/INGO</option>
-                            <option value="Academic Institution">Academic Institution</option>
-                            <option value="Government Body">Government Body</option>
-                            <option value="Other">Other</option>
+                            <option value="Private Hospital" {{ old('org_type') == 'Private Hospital' ? 'selected' : '' }}>
+                                Private Hospital</option>
+                            <option value="Public Hospital" {{ old('org_type') == 'Public Hospital' ? 'selected' : '' }}>
+                                Public Hospital</option>
+                            <option value="NGO/INGO" {{ old('org_type') == 'NGO/INGO' ? 'selected' : '' }}>NGO/INGO
+                            </option>
+                            <option value="Academic Institution"
+                                {{ old('org_type') == 'Academic Institution' ? 'selected' : '' }}>Academic Institution
+                            </option>
+                            <option value="Government Body" {{ old('org_type') == 'Government Body' ? 'selected' : '' }}>
+                                Government Body</option>
+                            <option value="Other" {{ old('org_type') == 'Other' ? 'selected' : '' }}>Other</option>
                         </select>
                         <label for="orgType">Type of Organization</label>
+                        @error('org_type')
+                            <div class="text-danger mt-1 small">{{ $message }}</div>
+                        @enderror
                     </div>
+
+                    {{-- Org Type Other --}}
                     <div class="form-floating form-section d-none" id="orgTypeOtherWrapper">
-                        <input class="form-control" id="orgTypeOther" name="org_type_other" type="text"
-                            placeholder="Please specify">
+                        <input class="form-control @error('org_type_other') is-invalid @enderror" id="orgTypeOther"
+                            name="org_type_other" type="text" placeholder="Please specify"
+                            value="{{ old('org_type_other') }}">
                         <label for="orgTypeOther">Please specify</label>
+                        @error('org_type_other')
+                            <div class="text-danger mt-1 small">{{ $message }}</div>
+                        @enderror
                     </div>
 
+                    {{-- Mobile --}}
                     <div class="form-floating form-section">
-                        <input class="form-control" id="mobile" name="number" type="text" placeholder="Mobile"
-                            required>
-                        <label for="mobile">Mobile Number</label>
+                        <input class="form-control @error('number') is-invalid @enderror" id="mobile" name="number"
+                            type="text" placeholder="Mobile" value="{{ old('number') }}">
+                        <label for="mobile">Mobile Number <span class="text-danger">*</span></label>
+                        @error('number')
+                            <div class="text-danger mt-1 small">{{ $message }}</div>
+                        @enderror
                     </div>
 
+                    {{-- Email --}}
                     <div class="form-floating form-section">
-                        <input class="form-control" id="email" name="email" type="email" placeholder="Email"
-                            required>
-                        <label for="email">Email Address</label>
+                        <input class="form-control @error('email') is-invalid @enderror" id="email" name="email"
+                            type="email" placeholder="Email" value="{{ old('email') }}">
+                        <label for="email">Email Address <span class="text-danger">*</span></label>
+                        @error('email')
+                            <div class="text-danger mt-1 small">{{ $message }}</div>
+                        @enderror
                     </div>
 
+                    {{-- Province --}}
                     <div class="form-floating form-section">
-                        <select class="form-select" id="province" name="province">
+                        <select class="form-select @error('province') is-invalid @enderror" id="province" name="province">
                             <option selected disabled>Select</option>
                             @foreach (['Koshi', 'Madhesh', 'Bagmati', 'Gandaki', 'Lumbini', 'Karnali', 'Sudurpashchim'] as $province)
-                                <option value="{{ $province }}">{{ $province }}</option>
+                                <option value="{{ $province }}" {{ old('province') == $province ? 'selected' : '' }}>
+                                    {{ $province }}</option>
                             @endforeach
                         </select>
                         <label for="province">Province</label>
+                        @error('province')
+                            <div class="text-danger mt-1 small">{{ $message }}</div>
+                        @enderror
                     </div>
 
+                    {{-- Participation Type --}}
                     <div class="form-floating form-section">
-                        <select class="form-select" id="participationType" name="participation">
+                        <select class="form-select @error('participation') is-invalid @enderror" id="participationType"
+                            name="participation">
                             <option selected disabled>Select</option>
-                            <option value="Board Member">Board Member</option>
-                            <option value="CEO/Director">CEO/Director</option>
-                            <option value="Hospital Manager">Hospital Manager</option>
-                            <option value="Medical Superintendent">Medical Superintendent</option>
-                            <option value="Quality Officer">Quality Officer</option>
-                            <option value="Other">Other</option>
+                            @foreach (['Board Member', 'CEO/Director', 'Hospital Manager', 'Medical Superintendent', 'Quality Officer', 'Other'] as $role)
+                                <option value="{{ $role }}"
+                                    {{ old('participation') == $role ? 'selected' : '' }}>{{ $role }}</option>
+                            @endforeach
                         </select>
                         <label for="participationType">Participation Type</label>
+                        @error('participation')
+                            <div class="text-danger mt-1 small">{{ $message }}</div>
+                        @enderror
                     </div>
+
+                    {{-- Participation Other --}}
                     <div class="form-floating form-section d-none" id="participationOtherWrapper">
-                        <input class="form-control" id="participationOther" name="participation_other" type="text"
-                            placeholder="Please specify">
+                        <input class="form-control @error('participation_other') is-invalid @enderror"
+                            id="participationOther" name="participation_other" type="text"
+                            placeholder="Please specify" value="{{ old('participation_other') }}">
                         <label for="participationOther">Please specify</label>
+                        @error('participation_other')
+                            <div class="text-danger mt-1 small">{{ $message }}</div>
+                        @enderror
                     </div>
 
+                    {{-- Dietary Restriction --}}
                     <div class="form-floating form-section">
-                        <input class="form-control" id="dietary" name="dietary_restriction" type="text"
-                            placeholder="Dietary Restrictions">
+                        <input class="form-control @error('dietary_restriction') is-invalid @enderror" id="dietary"
+                            name="dietary_restriction" type="text" placeholder="Dietary Restrictions"
+                            value="{{ old('dietary_restriction') }}">
                         <label for="dietary">Do you have any dietary restrictions?</label>
+                        @error('dietary_restriction')
+                            <div class="text-danger mt-1 small">{{ $message }}</div>
+                        @enderror
                     </div>
 
+                    {{-- Accommodation --}}
                     <div class="form-section">
-                        <label class="form-label">Do you require an accommodation recommendation?</label>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" id="accYes" type="radio" name="accommodation"
-                                value="Yes">
-                            <label class="form-check-label" for="accYes">Yes</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" id="accNo" type="radio" name="accommodation"
-                                value="No">
-                            <label class="form-check-label" for="accNo">No</label>
-                        </div>
+                        <label class="form-label">Do you require an accommodation recommendation?</label><br>
+                        @foreach (['Yes', 'No'] as $value)
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input @error('accommodation') is-invalid @enderror"
+                                    id="acc{{ $value }}" type="radio" name="accommodation"
+                                    value="{{ $value }}" {{ old('accommodation') == $value ? 'checked' : '' }}>
+                                <label class="form-check-label" for="acc{{ $value }}">{{ $value }}</label>
+                            </div>
+                        @endforeach
+                        @error('accommodation')
+                            <div class="text-danger mt-1 small">{{ $message }}</div>
+                        @enderror
                     </div>
 
+                    {{-- Membership --}}
                     <div class="form-section">
-                        <label class="form-label">Do you have NHCMA Membership?</label>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" id="memYes" type="radio" name="membership"
-                                value="Yes">
-                            <label class="form-check-label" for="memYes">Yes</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" id="memNo" type="radio" name="membership"
-                                value="No">
-                            <label class="form-check-label" for="memNo">No</label>
-                        </div>
+                        <label class="form-label">Do you have NHCMA Membership?</label><br>
+                        @foreach (['Yes', 'No'] as $value)
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input @error('membership') is-invalid @enderror"
+                                    id="mem{{ $value }}" type="radio" name="membership"
+                                    value="{{ $value }}" {{ old('membership') == $value ? 'checked' : '' }}>
+                                <label class="form-check-label" for="mem{{ $value }}">{{ $value }}</label>
+                            </div>
+                        @endforeach
+                        @error('membership')
+                            <div class="text-danger mt-1 small">{{ $message }}</div>
+                        @enderror
                     </div>
 
+                    {{-- Membership Details --}}
                     <div class="d-none" id="membershipDetails">
-                        {{-- <div class="form-floating form-section">
-                            <input class="form-control" id="membershipNumber" name="member_num" type="text"
-                                placeholder="Membership Number">
-                            <label for="membershipNumber">Membership Number</label>
-                        </div> --}}
                         <div class="form-floating form-section">
-                            <input class="form-control" id="lifeMember" name="lifeMember_num" type="text"
-                                placeholder="Life Member Number">
+                            <input class="form-control @error('lifeMember_num') is-invalid @enderror" id="lifeMember"
+                                name="lifeMember_num" type="text" placeholder="Life Member Number"
+                                value="{{ old('lifeMember_num') }}">
                             <label for="lifeMember">Life Member Number</label>
+                            @error('lifeMember_num')
+                                <div class="text-danger mt-1 small">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="form-floating form-section">
-                            <input class="form-control" id="generalMember" name="generalMember_num" type="text"
-                                placeholder="General Member Number">
+                            <input class="form-control @error('generalMember_num') is-invalid @enderror"
+                                id="generalMember" name="generalMember_num" type="text"
+                                placeholder="General Member Number" value="{{ old('generalMember_num') }}">
                             <label for="generalMember">General Member Number</label>
+                            @error('generalMember_num')
+                                <div class="text-danger mt-1 small">{{ $message }}</div>
+                            @enderror
                         </div>
                     </div>
 
+                    {{-- Heard From --}}
                     <div class="form-floating form-section">
-                        <select class="form-select" id="heardFrom" name="hear">
+                        <select class="form-select @error('hear') is-invalid @enderror" id="heardFrom" name="hear">
                             <option selected disabled>Select</option>
-                            <option value="APHIN">APHIN</option>
-                            <option value="NHCMA">NHCMA</option>
-                            <option value="Email Invitation">Email Invitation</option>
-                            <option value="Social Media">Social Media</option>
-                            <option value="Word of Mouth">Word of Mouth</option>
-                            <option value="Other">Other</option>
+                            @foreach (['APHIN', 'NHCMA', 'Email Invitation', 'Social Media', 'Word of Mouth', 'Other'] as $source)
+                                <option value="{{ $source }}" {{ old('hear') == $source ? 'selected' : '' }}>
+                                    {{ $source }}</option>
+                            @endforeach
                         </select>
                         <label for="heardFrom">How did you hear about the event?</label>
+                        @error('hear')
+                            <div class="text-danger mt-1 small">{{ $message }}</div>
+                        @enderror
                     </div>
+
+                    {{-- Heard From Other --}}
                     <div class="form-floating form-section d-none" id="heardFromOtherWrapper">
-                        <input class="form-control" id="heardFromOther" name="hear_other" type="text"
-                            placeholder="Please specify">
+                        <input class="form-control @error('hear_other') is-invalid @enderror" id="heardFromOther"
+                            name="hear_other" type="text" placeholder="Please specify"
+                            value="{{ old('hear_other') }}">
                         <label for="heardFromOther">Please specify</label>
+                        @error('hear_other')
+                            <div class="text-danger mt-1 small">{{ $message }}</div>
+                        @enderror
                     </div>
 
+                    {{-- Remarks --}}
                     <div class="form-floating form-section">
-                        <textarea class="form-control" id="remarks" name="remarks" placeholder="Remarks or Questions"
-                            style="height: 100px"></textarea>
+                        <textarea class="form-control @error('remarks') is-invalid @enderror" id="remarks" name="remarks"
+                            placeholder="Remarks or Questions" style="height: 100px">{{ old('remarks') }}</textarea>
                         <label for="remarks">Remarks or Questions</label>
+                        @error('remarks')
+                            <div class="text-danger mt-1 small">{{ $message }}</div>
+                        @enderror
                     </div>
 
+                    {{-- Voucher --}}
                     <div class="mb-4">
-                        <label class="form-label" for="voucher">Payment Voucher</label>
-                        <input class="form-control" id="voucher" name="image" type="file">
+                        <label class="form-label" for="voucher">Payment Voucher <span
+                                class="text-danger">*</span></label>
+                        <input class="form-control @error('image') is-invalid @enderror" id="voucher" name="image"
+                            type="file">
+                        @error('image')
+                            <div class="text-danger mt-1 small">{{ $message }}</div>
+                        @enderror
                     </div>
 
                     <div class="alert d-none" id="formAlert" role="alert"></div>
@@ -314,50 +389,100 @@
                 </form>
             </div>
         </div>
-
-        {{-- <!-- Right Sticky Panel -->
-        <div class="side-panel">
-            <img class="logo" src="{{ asset('frontend/assets/images/logo1.png') }}" alt="Logo" />
-            <img class="qr-code" src="{{ asset('frontend/assets/images/QR.png') }}" alt="QR Code" />
-        </div> --}}
     </div>
 
-    {{-- Scripts --}}
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/toastr@2.1.4/build/toastr.min.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/toastr@2.1.4/build/toastr.min.css" rel="stylesheet" />
-
     <script>
+        // Show/hide "Other" input fields based on select choices
         document.getElementById('orgType').addEventListener('change', function() {
             document.getElementById('orgTypeOtherWrapper').classList.toggle('d-none', this.value !== 'Other');
         });
-
         document.getElementById('participationType').addEventListener('change', function() {
             document.getElementById('participationOtherWrapper').classList.toggle('d-none', this.value !== 'Other');
         });
-
         document.getElementById('heardFrom').addEventListener('change', function() {
             document.getElementById('heardFromOtherWrapper').classList.toggle('d-none', this.value !== 'Other');
         });
 
-        document.getElementById('memYes').addEventListener('change', () => {
-            document.getElementById('membershipDetails').classList.remove('d-none');
+        // Show/hide membership details
+        document.getElementById('memYes').addEventListener('change', function() {
+            document.getElementById('membershipDetails').classList.toggle('d-none', !this.checked);
+        });
+        document.getElementById('memNo').addEventListener('change', function() {
+            document.getElementById('membershipDetails').classList.toggle('d-none', this.checked);
         });
 
-        document.getElementById('memNo').addEventListener('change', () => {
-            document.getElementById('membershipDetails').classList.add('d-none');
-        });
-
+        // Form submission validation & AJAX post
         document.getElementById('registrationForm').addEventListener('submit', function(e) {
             e.preventDefault();
 
             let form = e.target;
             let formData = new FormData(form);
 
+            const requiredFields = [{
+                    id: 'fullName',
+                    name: 'Full Name'
+                },
+                {
+                    id: 'mobile',
+                    name: 'Mobile Number'
+                },
+                {
+                    id: 'email',
+                    name: 'Email Address'
+                },
+                {
+                    id: 'voucher',
+                    name: 'Payment Voucher'
+                }
+            ];
+
+            let isValid = true;
+            let missingFields = [];
+
+            // Clear previous invalid classes
+            requiredFields.forEach(field => {
+                let el = document.getElementById(field.id);
+                el.classList.remove('is-invalid');
+            });
+
+            requiredFields.forEach(field => {
+                let el = document.getElementById(field.id);
+                if (!el.value || (el.type === 'file' && el.files.length === 0)) {
+                    isValid = false;
+                    missingFields.push(field.name);
+                    el.classList.add('is-invalid');
+                }
+            });
+
+            let alertBox = document.getElementById('formAlert');
+
+            if (!isValid) {
+                alertBox.classList.remove('d-none', 'alert-success');
+                alertBox.classList.add('alert-danger');
+                alertBox.innerText = `Please fill out the required fields *: ${missingFields.join(', ')}`;
+                return;
+            } else {
+                alertBox.classList.add('d-none');
+                alertBox.classList.remove('alert-danger');
+            }
+
             axios.post(form.action, formData)
                 .then(response => {
                     toastr.success(response.data.message || 'Registration successful!');
                     form.reset();
+
+                    // Remove all validation classes after reset
+                    requiredFields.forEach(field => {
+                        let el = document.getElementById(field.id);
+                        el.classList.remove('is-invalid');
+                    });
+
+                    // Hide optional "Other" inputs and membership details after reset
+                    document.getElementById('orgTypeOtherWrapper').classList.add('d-none');
+                    document.getElementById('participationOtherWrapper').classList.add('d-none');
+                    document.getElementById('heardFromOtherWrapper').classList.add('d-none');
+                    document.getElementById('membershipDetails').classList.add('d-none');
                 })
                 .catch(error => {
                     if (error.response && error.response.data && error.response.data.errors) {
@@ -369,6 +494,15 @@
                         toastr.error('Something went wrong!');
                     }
                 });
+        });
+
+        // Remove red border on input as user types or changes file
+        ['fullName', 'mobile', 'email', 'voucher'].forEach(id => {
+            const el = document.getElementById(id);
+            if (el) {
+                el.addEventListener('input', () => el.classList.remove('is-invalid'));
+                el.addEventListener('change', () => el.classList.remove('is-invalid'));
+            }
         });
     </script>
 @endsection

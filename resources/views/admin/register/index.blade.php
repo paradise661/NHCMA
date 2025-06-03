@@ -57,9 +57,6 @@
             @endif
         </div>
     </div>
-    {{-- <a class="btn btn-success btn-sm" href="{{ route('admin.register.export') }}">
-        <i class="fa fa-download"></i> Export to Excel
-    </a> --}}
 @endsection
 
 @section('scripts')
