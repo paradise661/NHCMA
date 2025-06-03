@@ -414,22 +414,43 @@
     </tr>
   `;
         }
-
         document.getElementById('registrationForm').addEventListener('submit', function(e) {
             e.preventDefault();
 
             let form = e.target;
             formDataGlobal = new FormData(form);
 
-            let requiredIds = ['fullName', 'mobile', 'email', 'voucher'];
+            // Map input IDs to their human-readable labels
+            const requiredFields = [{
+                    id: 'fullName',
+                    label: 'Full Name'
+                },
+                {
+                    id: 'mobile',
+                    label: 'Mobile Number'
+                },
+                {
+                    id: 'email',
+                    label: 'Email Address'
+                },
+                {
+                    id: 'voucher',
+                    label: 'Payment Voucher'
+                }
+            ];
+
             let missing = [];
-            requiredIds.forEach(id => {
+
+            requiredFields.forEach(({
+                id,
+                label
+            }) => {
                 let el = document.getElementById(id);
+                if (!el) return; // just in case element doesn't exist
                 if (el.type === 'file') {
-                    if (el.files.length === 0) missing.push(el.previousElementSibling?.innerText ||
-                        'File input');
+                    if (el.files.length === 0) missing.push(label);
                 } else if (!el.value.trim()) {
-                    missing.push(el.previousElementSibling?.innerText || 'Input');
+                    missing.push(label);
                 }
             });
 
